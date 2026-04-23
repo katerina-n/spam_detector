@@ -1,0 +1,99 @@
+[
+    {
+        "user_id": 141,
+        "triggered_rules": [
+            {
+                "rule": "high_block_rate",
+                "evidence": {
+                    "messages_sent": 15,
+                    "blocks_received": 5,
+                    "block_rate": 0.33
+                }
+            }
+        ]
+    },
+    {
+        "user_id": 73,
+        "triggered_rules": [
+            {
+                "rule": "many_unique_receivers",
+                "evidence": {
+                    "messages_sent": 30,
+                    "unique_receivers": 28
+                }
+            }
+        ]
+    },
+    {
+        "user_id": 28,
+        "triggered_rules": [
+            {
+                "rule": "many_unique_receivers",
+                "evidence": {
+                    "messages_sent": 40,
+                    "unique_receivers": 35
+                }
+            }
+        ]
+    },
+    {
+        "user_id": 167,
+        "triggered_rules": [
+            {
+                "rule": "many_unique_receivers",
+                "evidence": {
+                    "messages_sent": 25,
+                    "unique_receivers": 23
+                }
+            }
+        ]
+    },
+    {
+        "user_id": 196,
+        "triggered_rules": [
+            {
+                "rule": "many_unique_receivers",
+                "evidence": {
+                    "messages_sent": 35,
+                    "unique_receivers": 24
+                }
+            }
+        ]
+    },
+    {
+        "user_id": 109,
+        "triggered_rules": [
+            {
+                "rule": "many_unique_receivers",
+                "evidence": {
+                    "messages_sent": 20,
+                    "unique_receivers": 19
+                }
+            }
+        ]
+    },
+    {
+        "user_id": 124,
+        "triggered_rules": [
+            {
+                "rule": "many_unique_receivers",
+                "evidence": {
+                    "messages_sent": 20,
+                    "unique_receivers": 17
+                }
+            }
+        ]
+    },
+    {
+        "user_id": 54,
+        "triggered_rules": [
+            {
+                "rule": "many_unique_receivers",
+                "evidence": {
+                    "messages_sent": 25,
+                    "unique_receivers": 24
+                }
+            }
+        ]
+    }
+]

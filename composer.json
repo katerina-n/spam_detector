@@ -1,0 +1,8 @@
+{
+  "name": "test/spam-detector",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}
