@@ -9,6 +9,7 @@ use App\Event\EventFactory;
 use App\Processor\EventProcessor;
 use App\Reader\JsonLineEventReader;
 use App\Rule\HighBlockRateRule;
+use App\Rule\HighComplaintRateRule;
 use App\Rule\ManyUniqueReceiversRule;
 use App\Stats\UserStatsRepository;
 use App\Writer\SuspiciousJsonWriter;
@@ -33,6 +34,7 @@ foreach ($reader->read($inputFile) as $event) {
 $rules = [
     new ManyUniqueReceiversRule(),
     new HighBlockRateRule(),
+    new HighComplaintRateRule(),
 ];
 
 $engine = new RulesEngine($rules);

@@ -6,37 +6,37 @@ namespace App\Rule;
 
 use App\Stats\UserStats;
 
-class HighBlockRateRule implements RuleInterface
+class HighComplaintRateRule implements RuleInterface
 {
     public function __construct(
         private int $minMessagesSent = 10,
-        private float $minBlockRate = 0.3
+        private float $minComplaintRate = 0.02
     ) {
     }
 
     public function getName(): string
     {
-        return 'high_block_rate';
+        return 'high_complaint_rate';
     }
 
     public function check(UserStats $stats): ?RuleResult
     {
         $messagesSent = $stats->getMessagesSent();
-        $blocksReceived = $stats->getBlocksReceived();
+        $complaintsReceived = $stats->getComplaintsReceived();
 
         if ($messagesSent < $this->minMessagesSent) {
             return null;
         }
 
-        $blockRate = $blocksReceived / $messagesSent;
+        $complaintRate = $complaintsReceived / $messagesSent;
 
-        if ($blockRate >= $this->minBlockRate) {
+        if ($complaintRate >= $this->minComplaintRate) {
             return new RuleResult(
                 $this->getName(),
                 [
                     'messages_sent' => $messagesSent,
-                    'blocks_received' => $blocksReceived,
-                    'block_rate' => \round($blockRate, 2),
+                    'complaints_received' => $complaintsReceived,
+                    'complaint_rate' => round($complaintRate, 2),
                 ]
             );
         }

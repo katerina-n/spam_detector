@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Engine;
 
 use App\Rule\RuleInterface;
+use App\Stats\UserStats;
 use App\Stats\UserStatsRepository;
 
-final class RulesEngine
+class RulesEngine
 {
     /**
      * @param RuleInterface[] $rules
@@ -22,15 +23,7 @@ final class RulesEngine
         $result = [];
 
         foreach ($repository->all() as $userStats) {
-            $triggeredRules = [];
-
-            foreach ($this->rules as $rule) {
-                $ruleResult = $rule->check($userStats);
-
-                if ($ruleResult !== null) {
-                    $triggeredRules[] = $ruleResult->toArray();
-                }
-            }
+            $triggeredRules = $this->evaluateUser($userStats);
 
             if ($triggeredRules !== []) {
                 $result[] = [
@@ -41,5 +34,20 @@ final class RulesEngine
         }
 
         return $result;
+    }
+
+    private function evaluateUser(UserStats $userStats): array
+    {
+        $triggeredRules = [];
+
+        foreach ($this->rules as $rule) {
+            $ruleResult = $rule->check($userStats);
+
+            if ($ruleResult !== null) {
+                $triggeredRules[] = $ruleResult->toArray();
+            }
+        }
+
+        return $triggeredRules;
     }
 }
