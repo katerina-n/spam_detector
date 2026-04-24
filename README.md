@@ -17,7 +17,7 @@ php run.php events.json
 
 Після запуску буде створено файл `suspicious.json`.
 
-Для кожного користувача система накопичує:
+Для кожного користувача є накопичення:
 кількість відправлених повідомлень
 кількість отриманих повідомлень 
 кількість отриманих блокувань
@@ -51,3 +51,41 @@ php run.php events.json
 3. `EventProcessor` оновлює статистику користувачів.
 4. `RulesEngine` запускає всі правила.
 5. `SuspiciousJsonWriter` зберігає результат у JSON.
+
+Як інтегрувати в прод
+
+1. окремий PHP microservice для spam detection
+2. події приходять через message broker
+3. сервіс читає їх асинхронно через consumer
+4. Redis зберігає короткоживучу статистику по юзеру
+5. MySQL зберігає moderation cases / історію підозрілих акаунтів
+6. підозрілих акаунтів сервіс кладе в чергу на модерацію
+7. модераторський сервіс або внутрішній інструмент читає цю чергу
+
+
+Які ще можна умови додати:
+наприклад
+HighNoReplyRateRule
+Логіка:
+користувач багато пише, але майже не отримує повідомлень у відповідь
+
+Приблизна умова:
+messagesSent >= 20
+messagesReceived / messagesSent <= 0.05
+
+або
+багато повідомлень, багато унікальних отримувачів, мало вхідних повідомлень
+
+наприклад:
+messagesSent >= 30
+uniqueReceivers >= 20
+messagesReceived <= 2
+
+також можнапридумати формулу по якій рахувати підозрілість
+наприклад:
+0.30 * block_rate + 0.40 * complaint_rate + 0.10 * unique_receivers_ratio + 0.10 * no_reply_rate
+де
+block_rate = blocks_received / messages_sent
+complaint_rate = complaints_received / messages_sent
+unique_receivers_ratio = unique_receivers / messages_sent
+no_reply_rate = no_reply_received / messages_sent
