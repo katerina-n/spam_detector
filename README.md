@@ -8,7 +8,7 @@
 
 ## Встановлення
 ```bash
-composer dump-autoload
+composer install
 ```
 ## Запуск
 ```bash
