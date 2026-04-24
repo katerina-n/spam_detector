@@ -89,3 +89,6 @@ block_rate = blocks_received / messages_sent
 complaint_rate = complaints_received / messages_sent
 unique_receivers_ratio = unique_receivers / messages_sent
 no_reply_rate = no_reply_received / messages_sent
+
+реального часу зайняло 2.5-3 години
+я б хотіла ще покрити тестами і більше правил придумати і підключити як пакет
